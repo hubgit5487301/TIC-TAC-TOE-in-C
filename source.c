@@ -11,7 +11,7 @@
 #define RESET "\033[0m"
 #define ORANGE "\033[38;2;255;165;0m"
 
-int input_arrow()
+int input_arrow() //Function to return a value on a key press
 { while(1)
  {switch(getch())
   { case 72:    
@@ -32,7 +32,8 @@ int input_arrow()
   }
 }
 
-char display_grid_value(int b[],int grid_value)
+
+char display_grid_value(int b[],int grid_value)  //Function to display value in game grid
 {  
    if(grid_value==1)
    {  
@@ -57,7 +58,7 @@ char display_grid_value(int b[],int grid_value)
    return 0;
 }
 
-void instructions_multi_player()
+void instructions_multi_player() //instructions for multi player mode
 {   
     printf("                       !!!! TIC TAC TOE !!!!\n");
     printf("                    Made by Vikas Yadav 21cse71\n\n");
@@ -66,7 +67,7 @@ void instructions_multi_player()
     printf("Player 1 :  %sX%s\nPlayer 2 :  %sO%s\n\n",GREEN,RESET,RED,RESET);
 }
 
-void instructions_single_player()
+void instructions_single_player() //instructions for single player mode
 {   
     printf("                       !!!! TIC TAC TOE !!!!\n");
     printf("                    Made by Vikas Yadav 21cse71\n\n");
@@ -75,7 +76,7 @@ void instructions_single_player()
     printf("Player :  %sX%s\n\n",GREEN,RESET);
 }
 
-char *color_display(int b[],int grid_value)
+char *color_display(int b[],int grid_value) //function to return color macro
 {   
     char *color;
     if(b[grid_value]==-1)
@@ -97,7 +98,7 @@ char *color_display(int b[],int grid_value)
 
 }
 
-void display_grid(int b[],int mode)
+void display_grid(int b[],int mode) //function to display the grid of game
 {   
     system("cls");
     HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -123,7 +124,7 @@ void display_grid(int b[],int mode)
     
 }
 
-void store_current_position(int b[],int position,int mode,int turn)
+void store_current_position(int b[],int position,int mode,int turn) //function to store & display the marker to be pressed
 {   
     int temp;
     temp=b[position];
@@ -139,7 +140,7 @@ void store_current_position(int b[],int position,int mode,int turn)
     b[position]=temp;
 }
 
-void player_Move(int b[],int mode,int type,int turn) 
+void player_Move(int b[],int mode,int type,int turn) // function to take & store input from player
 {
     int move,position=4;
     again:
@@ -247,7 +248,7 @@ void player_Move(int b[],int mode,int type,int turn)
     }
 }
 
-int winner_check(int b[]) 
+int winner_check(int b[]) // function to check game state of win,lose or draw
 {   
     int position,wins[8][3] = {{0,1,2},{3,4,5},{6,7,8},{0,3,6},{1,4,7},{2,5,8},{0,4,8},{2,4,6}};
     for(position=0;position<8;position++) 
@@ -260,7 +261,7 @@ int winner_check(int b[])
     return 0;
 }
 
-int minimax(int b[9],int player,int depth,int max_depth) 
+int minimax(int b[9],int player,int depth,int max_depth) //function to return the score of next move 
 {   
     int winner=winner_check(b);
     if(winner!=0||depth==max_depth) 
@@ -291,7 +292,7 @@ int minimax(int b[9],int player,int depth,int max_depth)
     return score;
 }
     
-void computer_Move(int b[],int diffculty) 
+void computer_Move(int b[],int diffculty) //function to make move for the computer for single player mode
 {   int max_depth;
     if(diffculty==1)
     {
@@ -325,7 +326,7 @@ void computer_Move(int b[],int diffculty)
     b[move] = 1;
 }
 
-void display_game_result(int b,int mode)
+void display_game_result(int b,int mode) // function t display the  final game result
 { 
    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
    if(mode==2) 
@@ -365,7 +366,7 @@ void display_game_result(int b,int mode)
    
 }
 
-void display_choice(int choice)
+void display_choice(int choice) // function to display the choice of user in menu with different color
 {
     if(choice==1)
     {
@@ -381,7 +382,7 @@ void display_choice(int choice)
     }
 }
 
-void display_choice_for_difficulty(int choice)
+void display_choice_for_difficulty(int choice)// function to display the choice of user in selecting difficulty
 {
     if(choice==1)
     {
@@ -397,7 +398,7 @@ void display_choice_for_difficulty(int choice)
     }
 }
 
-int menu()
+int menu() // function to display and return the choice of user from menu
 { 
   int choice=1,move;
   system("cls");
@@ -455,7 +456,7 @@ int menu()
  return choice;
 }
 
-int difficulty_lvl_minimax()
+int difficulty_lvl_minimax() // function to select difficulty for single player mode
 {
   int choice=1,move=0;
   system("cls");
@@ -515,7 +516,7 @@ int difficulty_lvl_minimax()
 }
 
 
-int main()
+int main() // main function
 {  
   int b[9],replay=0,grid_input_0;
   int mode;
